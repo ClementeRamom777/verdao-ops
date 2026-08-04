@@ -1,0 +1,13 @@
+certifi==2026.7.22
+charset-normalizer==3.4.9
+idna==3.18
+Jinja2==3.1.6
+markdown-it-py==4.2.0
+MarkupSafe==3.0.3
+mdurl==0.1.2
+Pygments==2.20.0
+python-dotenv==1.2.2
+PyYAML==6.0.3
+requests==2.34.2
+rich==15.0.0
+urllib3==2.7.0
