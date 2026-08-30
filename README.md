@@ -2,7 +2,7 @@
 
 Central de dados do Palmeiras na linha de comando: próximos jogos, últimos resultados e classificação do Brasileirão num comando só — com relatório em HTML e cache local para funcionar mesmo quando a API está fora do ar.
 
-> **Print do terminal:** *(adicionar captura do `--tabela` aqui — com rich fica bonito!)*
+![Classificação do Brasileirão no terminal](docs/tabela_brasileirao.png)
 
 ## Como rodar (PowerShell)
 
@@ -42,12 +42,12 @@ O plano gratuito inclui o Brasileirão Série A e limita a **10 chamadas por min
 As preferências ficam no `config.yaml`, fora do código:
 
 ```yaml
-time_id: 1769            # ID do Palmeiras na API
-competicao: BSA          # Brasileirão Série A
-proximos_jogos: 5        # quantos jogos futuros mostrar
-ultimos_jogos: 5         # quantos resultados passados mostrar
-cache_minutos: 60        # validade do cache
-fuso: America/Sao_Paulo  # horários exibidos em Brasília
+time_id: 1769 # ID do Palmeiras na API
+competicao: BSA # Brasileirão Série A
+proximos_jogos: 5 # quantos jogos futuros mostrar
+ultimos_jogos: 5 # quantos resultados passados mostrar
+cache_minutos: 60 # validade do cache
+fuso: America/Sao_Paulo # horários exibidos em Brasília
 ```
 
 Trocar de time ou competição é editar uma linha — nenhum código precisa mudar.
