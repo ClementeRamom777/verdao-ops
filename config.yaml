@@ -1,0 +1,6 @@
+time_id: 1769            # ID do Palmeiras na API (football-data.org)
+competicao: BSA          # Brasileirao Serie A
+proximos_jogos: 5        # quantos jogos futuros mostrar
+ultimos_jogos: 5         # quantos resultados passados mostrar
+cache_minutos: 60        # validade do cache, em minutos
+fuso: America/Sao_Paulo  # horarios exibidos neste fuso
