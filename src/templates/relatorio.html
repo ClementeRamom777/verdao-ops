@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Verdão Ops — Relatório do Palmeiras</title>
+<style>
+    :root {
+        --verde: #006437;
+        --verde-claro: #0a8a4a;
+        --dourado: #c8a951;
+        --cinza-fundo: #f4f4f2;
+        --cinza-borda: #ddd;
+    }
+    * { box-sizing: border-box; }
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--cinza-fundo);
+        color: #222;
+        margin: 0;
+        padding: 0 0 3rem 0;
+    }
+    header {
+        background: var(--verde);
+        color: #fff;
+        padding: 1.5rem 2rem;
+        border-bottom: 4px solid var(--dourado);
+    }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { margin: 0.3rem 0 0 0; opacity: 0.85; font-size: 0.9rem; }
+    main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+    section {
+        background: #fff;
+        border: 1px solid var(--cinza-borda);
+        border-radius: 8px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.8rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    section h2 {
+        color: var(--verde);
+        border-bottom: 2px solid var(--dourado);
+        padding-bottom: 0.4rem;
+        font-size: 1.15rem;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.8rem;
+        font-size: 0.92rem;
+    }
+    th, td {
+        text-align: left;
+        padding: 0.5rem 0.6rem;
+        border-bottom: 1px solid var(--cinza-borda);
+    }
+    th {
+        background: #f0f0ee;
+        color: #444;
+        font-weight: 600;
+    }
+    td.numero, th.numero { text-align: right; }
+    .destaque, .destaque td {
+        background: #eafaf0;
+        font-weight: 700;
+        color: var(--verde);
+    }
+    .vazio {
+        color: #888;
+        font-style: italic;
+    }
+    footer {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        color: #777;
+        font-size: 0.8rem;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Verdão Ops</h1>
+    <p>Relatório gerado em {{ gerado_em }} (horário de Brasília)</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>Próximos jogos</h2>
+        {% if proximos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Mandante</th>
+                    <th class="numero">Placar</th>
+                    <th>Visitante</th>
+                    <th class="numero">Rodada</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in proximos %}
+                <tr>
+                    <td>{{ p.data_hora }}</td>
+                    <td{% if p.destaque_mandante %} class="destaque"{% endif %}>{{ p.mandante }}</td>
+                    <td class="numero">{{ p.placar }}</td>
+                    <td{% if p.destaque_visitante %} class="destaque"{% endif %}>{{ p.visitante }}</td>
+                    <td class="numero">{{ p.rodada }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="vazio">Nenhum jogo futuro encontrado.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Últimos resultados</h2>
+        {% if resultados %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Mandante</th>
+                    <th class="numero">Placar</th>
+                    <th>Visitante</th>
+                    <th class="numero">Rodada</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in resultados %}
+                <tr>
+                    <td>{{ p.data_hora }}</td>
+                    <td{% if p.destaque_mandante %} class="destaque"{% endif %}>{{ p.mandante }}</td>
+                    <td class="numero">{{ p.placar }}</td>
+                    <td{% if p.destaque_visitante %} class="destaque"{% endif %}>{{ p.visitante }}</td>
+                    <td class="numero">{{ p.rodada }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="vazio">Nenhum resultado encontrado.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Classificação — Brasileirão Série A</h2>
+        {% if classificacao %}
+        <table>
+            <thead>
+                <tr>
+                    <th class="numero">Pos</th>
+                    <th>Time</th>
+                    <th class="numero">Pts</th>
+                    <th class="numero">J</th>
+                    <th class="numero">V</th>
+                    <th class="numero">E</th>
+                    <th class="numero">D</th>
+                    <th class="numero">GP</th>
+                    <th class="numero">GC</th>
+                    <th class="numero">SG</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in classificacao %}
+                <tr{% if c.destaque %} class="destaque"{% endif %}>
+                    <td class="numero">{{ c.posicao }}</td>
+                    <td>{{ c.time }}</td>
+                    <td class="numero">{{ c.pontos }}</td>
+                    <td class="numero">{{ c.jogos }}</td>
+                    <td class="numero">{{ c.vitorias }}</td>
+                    <td class="numero">{{ c.empates }}</td>
+                    <td class="numero">{{ c.derrotas }}</td>
+                    <td class="numero">{{ c.gols_pro }}</td>
+                    <td class="numero">{{ c.gols_contra }}</td>
+                    <td class="numero">{{ c.saldo_gols }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="vazio">Classificação indisponível.</p>
+        {% endif %}
+    </section>
+
+</main>
+
+<footer>
+    Gerado automaticamente pelo Verdão Ops. Dados: football-data.org.
+</footer>
+
+</body>
+</html>
